@@ -3,11 +3,10 @@ package hoangnd.learn.spring.jpa;
 import jakarta.persistence.SharedCacheMode;
 import jakarta.persistence.ValidationMode;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.EnableLoadTimeWeaving;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
@@ -17,7 +16,7 @@ public class JPAConfig {
     @Bean
     LocalContainerEntityManagerFactoryBean entityManagerFactory(final DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-        var vendorAdapter = new HibernateJpaVendorAdapter();
+        var vendorAdapter = new EclipseLinkJpaVendorAdapter();
         factory.setJpaVendorAdapter(vendorAdapter);
         factory.setDataSource(dataSource);
         factory.setPackagesToScan("hoangnd.learn.spring.entity");
